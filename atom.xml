@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-06-27T20:38:27.599Z</updated>
+  <updated>2020-07-03T17:46:18.617Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>写在前面/Foreword</title>
+    <link href="http://yoursite.com/2020/07/03/%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2-Foreword/"/>
+    <id>http://yoursite.com/2020/07/03/%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2-Foreword/</id>
+    <published>2020-07-03T16:40:40.000Z</published>
+    <updated>2020-07-03T17:46:18.617Z</updated>
+    
+    <content type="html"><![CDATA[<p>通过Hexo + Github page部署了自己的第一个博客，接下来会在这里记录学习甚至是其他方面的东西。</p><p>无总结则无进步嘛，之前学过的很多东西，经历过的很多的事，没有见诸文字，也就慢慢地忘记了。这也是部署这个博客很重要的一个原因。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;通过Hexo + Github page部署了自己的第一个博客，接下来会在这里记录学习甚至是其他方面的东西。&lt;/p&gt;
+&lt;p&gt;无总结则无进步嘛，之前学过的很多东西，经历过的很多的事，没有见诸文字，也就慢慢地忘记了。这也是部署这个博客很重要的一个原因。&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="杂" scheme="http://yoursite.com/categories/%E6%9D%82/"/>
+    
+      <category term="Other" scheme="http://yoursite.com/categories/%E6%9D%82/Other/"/>
+    
+    
+      <category term="杂" scheme="http://yoursite.com/tags/%E6%9D%82/"/>
+    
+      <category term="Other" scheme="http://yoursite.com/tags/Other/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
