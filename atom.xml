@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-07-14T21:08:57.123Z</updated>
+  <updated>2020-08-06T04:45:05.584Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Monotonic Stack</title>
+    <link href="http://yoursite.com/2020/08/05/Monotonic-Stack/"/>
+    <id>http://yoursite.com/2020/08/05/Monotonic-Stack/</id>
+    <published>2020-08-05T20:43:52.000Z</published>
+    <updated>2020-08-06T04:45:05.584Z</updated>
+    
+    <content type="html"><![CDATA[<p>持续施工中</p><h3 id="What-is-mono-stack"><a href="#What-is-mono-stack" class="headerlink" title="What is mono stack?"></a><strong>What is mono stack?</strong></h3><p>Monotonic stack is actually a stack. It just uses some ingenious logic <strong>to keep the elements in the stack orderly</strong> (monotone increasing or monotone decreasing) after each new element putting into the stack.</p><p>本质上来说，单调栈就是一个栈。只不过我们在元素加入过程中会进行pop操作来保证栈的单调性。</p><h3 id="Advantage-of-mono-stack"><a href="#Advantage-of-mono-stack" class="headerlink" title="Advantage of mono stack:"></a><strong>Advantage</strong> of mono stack:</h3><p><strong>Linear time complexity</strong>, all elements will only be <strong>put into the stack once</strong>, and once they are out of the stack, they will not come in again.</p><p>使用单调栈往往意味着线性复杂度解决问题，所以如果你发现了题目有着单调栈的pattern，那么就可以尝试使用单调栈优化算法。</p><h3 id="Properties-of-monotonic-stack"><a href="#Properties-of-monotonic-stack" class="headerlink" title="Properties of monotonic stack"></a><strong>Properties of monotonic stack</strong></h3><ol><li><p>The elements in the monotonic stack are monotonic</p></li><li><p>Before elements are added to the stack, all elements that <strong>destroy the monotonicity of the stack</strong> will be <strong>deleted</strong> at the top of the stack</p></li></ol><h3 id="What-kind-of-problem-use-mono-stack"><a href="#What-kind-of-problem-use-mono-stack" class="headerlink" title="What kind of problem use mono stack?"></a><strong>What kind of problem use mono stack?</strong></h3><p>The problems that <strong>cares about</strong> the first element <strong>smaller/greater</strong> than it in the <strong>left/right</strong>.</p><p>很关键的一个问题，什么样的问题能够使用单调栈呢？</p><p>其实我们会发现，单调栈只擅长解决很小的一类问题，它的pattern十分明显：</p><p>那就是如果问题关心<strong>第一个左边/右边比它小/大</strong>的元素，那么就可以使用单调栈。</p><h3 id="Intuition-behind-mono-stack"><a href="#Intuition-behind-mono-stack" class="headerlink" title="Intuition behind mono stack"></a><strong>Intuition behind mono stack</strong></h3><p>Suppose we want to solve this question: </p><p>Given an array, we want to output the <strong>first</strong> element <strong>smaller</strong> than it in the <strong>left</strong> for every number in that array.</p><p>What is the <strong>naive</strong> way? </p><p>Just use two for/while loop to solve it brute forcely.</p><p>But clearly there are many repeating computation. So how to solve it efficiently?</p><p>We store elements before ai into a stack:[a0~ai-1] .</p><p>And each time search through this stack.</p><p><strong>But what if there are a pair aj &gt;= ak(j &lt; k):**</strong></p><p>Then aj will never be chosen<strong>.</strong></p><p><strong>Thus for all j &lt; k, aj &lt; ak. AKA </strong>monotonic**.</p><p>好了，说了半天，我们来举一个例子吧。</p><p>考虑这样一个问题：</p><p>给定一个数组，对于该数组中的每个数字，我们要输出的左边第一个比它小的数字。</p><p>什么是“天真”的方式？</p><p>只需使用两个for / while循环即可强行解决它。</p><p>但是显然有很多重复的计算。 那么如何有效地解决呢？</p><p>就是使用单调栈</p><h3 id="Code-template"><a href="#Code-template" class="headerlink" title="Code template"></a><strong>Code template</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">stk = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">    <span class="keyword">while</span> (stk &amp;&amp; check(stk[<span class="number">-1</span>], nums[i])): stk.pop()</span><br><span class="line">    stk.append(nums[i])</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check</span><span class="params">(num1, num2)</span>:</span></span><br><span class="line"><span class="keyword">return</span> num1 &gt;= num2</span><br></pre></td></tr></table></figure><h3 id="Extension"><a href="#Extension" class="headerlink" title="Extension"></a><strong>Extension</strong></h3><p>We just solved smaller/left.</p><p>How about greater or right?</p><p>for i in range(len(nums) - 1, -1, -1):</p><p>return num1 &lt;= num2</p><p>我们可以轻松地扩展单调栈应用到比右边或者第一个比它大的数。</p><h3 id="Problems"><a href="#Problems" class="headerlink" title="Problems"></a><strong>Problems</strong></h3><p>496 Next Greater Element I: <a href="https://leetcode.com/problems/next-greater-element-i/" target="_blank" rel="noopener">https://leetcode.com/problems/next-greater-element-i/</a></p><p>503 Next Greater Element II: <a href="https://leetcode.com/problems/next-greater-element-ii/" target="_blank" rel="noopener">https://leetcode.com/problems/next-greater-element-ii/</a>. </p><p>42 Trapping Rain Water: <a href="https://leetcode.com/problems/trapping-rain-water/" target="_blank" rel="noopener">https://leetcode.com/problems/trapping-rain-water/</a>. </p><p>84 Largest Rectangle in Histogram: <a href="https://leetcode.com/problems/largest-rectangle-in-histogram/" target="_blank" rel="noopener">https://leetcode.com/problems/largest-rectangle-in-histogram/</a></p><h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a><strong>Reference</strong></h3><ol><li><p><a href="https://github.com/labuladong/fucking-algorithm/blob/master/数据结构系列/单调栈.md" target="_blank" rel="noopener">https://github.com/labuladong/fucking-algorithm/blob/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%B3%BB%E5%88%97/%E5%8D%95%E8%B0%83%E6%A0%88.md</a></p></li><li><p><a href="https://blog.csdn.net/liujian20150808/article/details/50752861" target="_blank" rel="noopener">单调栈的介绍以及一些基本性质_多反思，多回顾，要坚持。</a></p></li><li><p><a href="https://blog.csdn.net/qq_17550379/article/details/86519771" target="_blank" rel="noopener">https://blog.csdn.net/qq_17550379/article/details/86519771</a></p></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;持续施工中&lt;/p&gt;
+&lt;h3 id=&quot;What-is-mono-stack&quot;&gt;&lt;a href=&quot;#What-is-mono-stack&quot; class=&quot;headerlink&quot; title=&quot;What is mono stack?&quot;&gt;&lt;/a&gt;&lt;strong&gt;What is mo
+      
+    
+    </summary>
+    
+    
+      <category term="Data Structure" scheme="http://yoursite.com/categories/Data-Structure/"/>
+    
+      <category term="Algorithm" scheme="http://yoursite.com/categories/Data-Structure/Algorithm/"/>
+    
+    
+      <category term="Data Structure" scheme="http://yoursite.com/tags/Data-Structure/"/>
+    
+      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+  </entry>
   
   <entry>
     <title>如何高效阅读论文</title>
