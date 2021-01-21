@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"lavidal.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Lecture #2: Intermediate SQLRELATIONAL LANGUAGESUser only needs to specify the answer that they want, not how to compute it.  The DBMS is responsible for efficient evaluation of the query.  → High-end">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Database Sys Lec2 Intermediate SQL">
+<meta property="og:url" content="https://lavidal.github.io/2021/01/21/Database-Sys-Lec2-Intermediate-SQL/index.html">
+<meta property="og:site_name" content="Call Me Sensei">
+<meta property="og:description" content="Lecture #2: Intermediate SQLRELATIONAL LANGUAGESUser only needs to specify the answer that they want, not how to compute it.  The DBMS is responsible for efficient evaluation of the query.  → High-end">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://lavidal.github.io/2021/01/21/Database-Sys-Lec2-Intermediate-SQL/Aggregates_1.png">
+<meta property="og:image" content="https://lavidal.github.io/2021/01/21/Database-Sys-Lec2-Intermediate-SQL/Aggregates_2.png">
+<meta property="og:image" content="https://lavidal.github.io/2021/01/21/Database-Sys-Lec2-Intermediate-SQL/Aggregates_3.png">
+<meta property="og:image" content="https://lavidal.github.io/2021/01/21/Database-Sys-Lec2-Intermediate-SQL/Having_1.png">
+<meta property="og:image" content="https://lavidal.github.io/2021/01/21/Database-Sys-Lec2-Intermediate-SQL/CTE_1.png">
+<meta property="og:image" content="https://lavidal.github.io/2021/01/21/Database-Sys-Lec2-Intermediate-SQL/CTE_2.png">
+<meta property="article:published_time" content="2021-01-21T19:09:02.000Z">
+<meta property="article:modified_time" content="2021-01-21T23:56:44.573Z">
+<meta property="article:author" content="Enze Long">
+<meta property="article:tag" content="Database System">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lavidal.github.io/2021/01/21/Database-Sys-Lec2-Intermediate-SQL/Aggregates_1.png">
+
+<link rel="canonical" href="https://lavidal.github.io/2021/01/21/Database-Sys-Lec2-Intermediate-SQL/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Database Sys Lec2 Intermediate SQL | Call Me Sensei</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Call Me Sensei" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Call Me Sensei</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">A curious boy</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/lavidal" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lavidal.github.io/2021/01/21/Database-Sys-Lec2-Intermediate-SQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Enze Long">
+      <meta itemprop="description" content="野蛮生长">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Call Me Sensei">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Database Sys Lec2 Intermediate SQL
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-21 14:09:02 / Modified: 18:56:44" itemprop="dateCreated datePublished" datetime="2021-01-21T14:09:02-05:00">2021-01-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/" itemprop="url" rel="index"><span itemprop="name">Computer Science</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Lecture-2-Intermediate-SQL"><a href="#Lecture-2-Intermediate-SQL" class="headerlink" title="Lecture #2: Intermediate SQL"></a>Lecture #2: Intermediate SQL</h1><h2 id="RELATIONAL-LANGUAGES"><a href="#RELATIONAL-LANGUAGES" class="headerlink" title="RELATIONAL LANGUAGES"></a>RELATIONAL LANGUAGES</h2><p>User only needs to <strong>specify the answer that they want</strong>, not how to compute it. </p>
+<p>The DBMS is responsible for <strong>efficient evaluation of the query</strong>. </p>
+<p>→ High-end systems have a <strong>sophisticated query optimizer</strong> that can <strong>rewrite queries and search for optimal execution strategies</strong>.</p>
+<ul>
+<li>Data Manipulation Language (DML) </li>
+<li>Data Definition Language (DDL) </li>
+<li>Data Control Language (DCL)</li>
+</ul>
+<p>Also includes: </p>
+<p>→ View definition </p>
+<p>→ Integrity &amp; Referential Constraints </p>
+<p>→ Transactions</p>
+<p>Important: SQL is based on <strong>bags (duplicates)</strong> not <strong>sets (no duplicates)</strong>.</p>
+<h2 id="Outline"><a href="#Outline" class="headerlink" title="Outline"></a>Outline</h2><ul>
+<li>Aggregations + Group By </li>
+<li>String / Date / Time Operations </li>
+<li>Output Control + Redirection </li>
+<li>Nested Queries </li>
+<li>Common Table Expressions </li>
+<li>Window Functions</li>
+</ul>
+<h2 id="Aggregates"><a href="#Aggregates" class="headerlink" title="Aggregates"></a>Aggregates</h2><p>Functions that return a single value from a bag of tuples: </p>
+<p>→ AVG(col)→ Return the average col value. </p>
+<p>→ MIN(col)→ Return minimum col value. </p>
+<p>→ MAX(col)→ Return maximum col value. </p>
+<p>→ SUM(col)→ Return sum of values in col. </p>
+<p>→ COUNT(col)→ Return # of values for col.</p>
+<p><strong>Aggregate functions</strong> can (almost) only be used in the <strong>SELECT output list</strong>.</p>
+<img src="/2021/01/21/Database-Sys-Lec2-Intermediate-SQL/Aggregates_1.png" class="">
+<p><strong>DISTINCT</strong> <strong>AGGREGATES</strong>: COUNT, SUM, AVG support DISTINCT</p>
+<img src="/2021/01/21/Database-Sys-Lec2-Intermediate-SQL/Aggregates_2.png" class="">
+<p>Output of <strong>other columns outside of an aggregate is undefined</strong>.</p>
+<img src="/2021/01/21/Database-Sys-Lec2-Intermediate-SQL/Aggregates_3.png" class="">
+<h2 id="GROUP-BY"><a href="#GROUP-BY" class="headerlink" title="GROUP BY"></a><strong>GROUP BY</strong></h2><p><strong>Project tuples into subsets</strong> and <strong>calculate aggregates</strong> against each subset.</p>
+
+<p><strong>Non-aggregated values</strong> in <strong>SELECT output clause</strong> must appear in <strong>GROUP BY clause</strong>.</p>
+
+
+<h2 id="HAVING"><a href="#HAVING" class="headerlink" title="HAVING"></a>HAVING</h2><p><strong>Filters</strong> results based on aggregation computation. Like a <strong>WHERE</strong> clause for a <strong>GROUP BY</strong></p>
+<img src="/2021/01/21/Database-Sys-Lec2-Intermediate-SQL/Having_1.png" class="">
+<h2 id="STRING-OPERATIONS"><a href="#STRING-OPERATIONS" class="headerlink" title="STRING OPERATIONS"></a>STRING OPERATIONS</h2>
+<p><strong>LIKE</strong> is used for string matching. </p>
+<p>String-matching operators </p>
+<p>→<strong>‘%’ Matches any substring (including empty strings).</strong> </p>
+<p>→<strong>‘_’ Match any one character</strong></p>
+
+<p>SQL-92 defines string functions. </p>
+<p>→ Many DBMSs also have their own unique functions </p>
+<p>Can be used in either output and predicates</p>
+
+<p>SQL standard says to use <strong>||</strong> operator to <strong>concatenate two or more strings together</strong>.</p>
+
+<h2 id="DATE-TIME-OPERATIONS"><a href="#DATE-TIME-OPERATIONS" class="headerlink" title="DATE/TIME OPERATIONS"></a>DATE/TIME OPERATIONS</h2><p>Operations to manipulate and modify <strong>DATE/TIME attributes</strong>. </p>
+<p>Can be used in either <strong>output and predicates</strong>. </p>
+<p>Support/syntax varies wildly…</p>
+<h2 id="OUTPUT-REDIRECTION"><a href="#OUTPUT-REDIRECTION" class="headerlink" title="OUTPUT REDIRECTION"></a>OUTPUT REDIRECTION</h2><p>Store <strong>query results</strong> in another table: </p>
+<p>→ <strong>Table must not already be defined</strong>. </p>
+<p>→ Table will have the <strong>same # of columns</strong> with <strong>the same types as the input</strong>.</p>
+
+<p>Insert tuples from query into another table: </p>
+<p>→ Inner SELECT must generate the same columns as the target table. </p>
+<p>→ DBMSs have different options/syntax on what to do with integrity violations (e.g., invalid duplicates).</p>
+
+<h2 id="OUTPUT-CONTROL"><a href="#OUTPUT-CONTROL" class="headerlink" title="OUTPUT CONTROL"></a>OUTPUT CONTROL</h2><p><strong>ORDER BY</strong> <column*> [ASC|DESC]</p>
+<p>→ Order the output tuples by the values in one or more of their columns.</p>
+<p><strong>LIMIT</strong>  <strong><count> [offset]</strong> </p>
+<p>→ Limit the # of tuples returned in output. </p>
+<p>→ Can set an offset to return a “range”</p>
+<h2 id="NESTED-QUERIES"><a href="#NESTED-QUERIES" class="headerlink" title="NESTED QUERIES"></a>NESTED QUERIES</h2><p>Queries containing other queries. </p>
+<p>They are often difficult to optimize. </p>
+<p><strong>Inner queries can appear (almost) anywhere in query</strong>.</p>
+<p><strong>ALL</strong>→ Must <strong>satisfy expression for all rows</strong> in the sub-query. </p>
+<p><strong>ANY</strong>→ Must <strong>satisfy expression for at least one row</strong> in the sub-query. </p>
+<p><strong>IN</strong>→ <strong>Equivalent to ‘=ANY()’</strong> . </p>
+<p><strong>EXISTS</strong>→ At <strong>least one row is returned</strong>.</p>
+<h2 id="WINDOW-FUNCTIONS"><a href="#WINDOW-FUNCTIONS" class="headerlink" title="WINDOW FUNCTIONS"></a>WINDOW FUNCTIONS</h2><p>Performs a “sliding” calculation across a set of tuples that are related. </p>
+<p>Like an aggregation but tuples are not grouped into a single output tuples.</p>
+
+
+<p>The <strong>OVER</strong> keyword specifies how to <strong>group together tuples</strong> when computing the window function. </p>
+<p>Use <strong>PARTITION BY to specify group</strong>.</p>
+
+<p>You can also include an <strong>ORDER BY in the window grouping</strong> to sort entries in each group.</p>
+
+<h2 id="COMMON-TABLE-EXPRESSIONS"><a href="#COMMON-TABLE-EXPRESSIONS" class="headerlink" title="COMMON TABLE EXPRESSIONS"></a>COMMON TABLE EXPRESSIONS</h2><p>Provides a way to write <strong>auxiliary statements for use in a larger query</strong>. </p>
+<p>→ Think of it like a <strong>temp table just for one query</strong>. </p>
+<p>Alternative to nested queries and views.</p>
+<img src="/2021/01/21/Database-Sys-Lec2-Intermediate-SQL/CTE_1.png" class="Window">
+<img src="/2021/01/21/Database-Sys-Lec2-Intermediate-SQL/CTE_2.png" class="Window">
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Database-System/" rel="tag"># Database System</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/21/Database-Sys-Lec1-Course-Overview-and-Relational-Model/" rel="prev" title="Database Sys Lec1: Course Overview and Relational Model">
+      <i class="fa fa-chevron-left"></i> Database Sys Lec1: Course Overview and Relational Model
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lecture-2-Intermediate-SQL"><span class="nav-number">1.</span> <span class="nav-text">Lecture #2: Intermediate SQL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RELATIONAL-LANGUAGES"><span class="nav-number">1.1.</span> <span class="nav-text">RELATIONAL LANGUAGES</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Outline"><span class="nav-number">1.2.</span> <span class="nav-text">Outline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Aggregates"><span class="nav-number">1.3.</span> <span class="nav-text">Aggregates</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GROUP-BY"><span class="nav-number">1.4.</span> <span class="nav-text">GROUP BY</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HAVING"><span class="nav-number">1.5.</span> <span class="nav-text">HAVING</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#STRING-OPERATIONS"><span class="nav-number">1.6.</span> <span class="nav-text">STRING OPERATIONS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DATE-TIME-OPERATIONS"><span class="nav-number">1.7.</span> <span class="nav-text">DATE&#x2F;TIME OPERATIONS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OUTPUT-REDIRECTION"><span class="nav-number">1.8.</span> <span class="nav-text">OUTPUT REDIRECTION</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OUTPUT-CONTROL"><span class="nav-number">1.9.</span> <span class="nav-text">OUTPUT CONTROL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NESTED-QUERIES"><span class="nav-number">1.10.</span> <span class="nav-text">NESTED QUERIES</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WINDOW-FUNCTIONS"><span class="nav-number">1.11.</span> <span class="nav-text">WINDOW FUNCTIONS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#COMMON-TABLE-EXPRESSIONS"><span class="nav-number">1.12.</span> <span class="nav-text">COMMON TABLE EXPRESSIONS</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Enze Long"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Enze Long</p>
+  <div class="site-description" itemprop="description">野蛮生长</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Enze Long</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+    </div>
+</body>
+</html>

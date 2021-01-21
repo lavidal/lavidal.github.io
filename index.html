@@ -161,6 +161,161 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lavidal.github.io/2021/01/21/Database-Sys-Lec2-Intermediate-SQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Enze Long">
+      <meta itemprop="description" content="野蛮生长">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Call Me Sensei">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/21/Database-Sys-Lec2-Intermediate-SQL/" class="post-title-link" itemprop="url">Database Sys Lec2 Intermediate SQL</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-21 14:09:02 / Modified: 18:56:44" itemprop="dateCreated datePublished" datetime="2021-01-21T14:09:02-05:00">2021-01-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/" itemprop="url" rel="index"><span itemprop="name">Computer Science</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Lecture-2-Intermediate-SQL"><a href="#Lecture-2-Intermediate-SQL" class="headerlink" title="Lecture #2: Intermediate SQL"></a>Lecture #2: Intermediate SQL</h1><h2 id="RELATIONAL-LANGUAGES"><a href="#RELATIONAL-LANGUAGES" class="headerlink" title="RELATIONAL LANGUAGES"></a>RELATIONAL LANGUAGES</h2><p>User only needs to <strong>specify the answer that they want</strong>, not how to compute it. </p>
+<p>The DBMS is responsible for <strong>efficient evaluation of the query</strong>. </p>
+<p>→ High-end systems have a <strong>sophisticated query optimizer</strong> that can <strong>rewrite queries and search for optimal execution strategies</strong>.</p>
+<ul>
+<li>Data Manipulation Language (DML) </li>
+<li>Data Definition Language (DDL) </li>
+<li>Data Control Language (DCL)</li>
+</ul>
+<p>Also includes: </p>
+<p>→ View definition </p>
+<p>→ Integrity &amp; Referential Constraints </p>
+<p>→ Transactions</p>
+<p>Important: SQL is based on <strong>bags (duplicates)</strong> not <strong>sets (no duplicates)</strong>.</p>
+<h2 id="Outline"><a href="#Outline" class="headerlink" title="Outline"></a>Outline</h2><ul>
+<li>Aggregations + Group By </li>
+<li>String / Date / Time Operations </li>
+<li>Output Control + Redirection </li>
+<li>Nested Queries </li>
+<li>Common Table Expressions </li>
+<li>Window Functions</li>
+</ul>
+<h2 id="Aggregates"><a href="#Aggregates" class="headerlink" title="Aggregates"></a>Aggregates</h2><p>Functions that return a single value from a bag of tuples: </p>
+<p>→ AVG(col)→ Return the average col value. </p>
+<p>→ MIN(col)→ Return minimum col value. </p>
+<p>→ MAX(col)→ Return maximum col value. </p>
+<p>→ SUM(col)→ Return sum of values in col. </p>
+<p>→ COUNT(col)→ Return # of values for col.</p>
+<p><strong>Aggregate functions</strong> can (almost) only be used in the <strong>SELECT output list</strong>.</p>
+<img src="/2021/01/21/Database-Sys-Lec2-Intermediate-SQL/Aggregates_1.png" class="">
+<p><strong>DISTINCT</strong> <strong>AGGREGATES</strong>: COUNT, SUM, AVG support DISTINCT</p>
+<img src="/2021/01/21/Database-Sys-Lec2-Intermediate-SQL/Aggregates_2.png" class="">
+<p>Output of <strong>other columns outside of an aggregate is undefined</strong>.</p>
+<img src="/2021/01/21/Database-Sys-Lec2-Intermediate-SQL/Aggregates_3.png" class="">
+<h2 id="GROUP-BY"><a href="#GROUP-BY" class="headerlink" title="GROUP BY"></a><strong>GROUP BY</strong></h2><p><strong>Project tuples into subsets</strong> and <strong>calculate aggregates</strong> against each subset.</p>
+
+<p><strong>Non-aggregated values</strong> in <strong>SELECT output clause</strong> must appear in <strong>GROUP BY clause</strong>.</p>
+
+
+<h2 id="HAVING"><a href="#HAVING" class="headerlink" title="HAVING"></a>HAVING</h2><p><strong>Filters</strong> results based on aggregation computation. Like a <strong>WHERE</strong> clause for a <strong>GROUP BY</strong></p>
+<img src="/2021/01/21/Database-Sys-Lec2-Intermediate-SQL/Having_1.png" class="">
+<h2 id="STRING-OPERATIONS"><a href="#STRING-OPERATIONS" class="headerlink" title="STRING OPERATIONS"></a>STRING OPERATIONS</h2>
+<p><strong>LIKE</strong> is used for string matching. </p>
+<p>String-matching operators </p>
+<p>→<strong>‘%’ Matches any substring (including empty strings).</strong> </p>
+<p>→<strong>‘_’ Match any one character</strong></p>
+
+<p>SQL-92 defines string functions. </p>
+<p>→ Many DBMSs also have their own unique functions </p>
+<p>Can be used in either output and predicates</p>
+
+<p>SQL standard says to use <strong>||</strong> operator to <strong>concatenate two or more strings together</strong>.</p>
+
+<h2 id="DATE-TIME-OPERATIONS"><a href="#DATE-TIME-OPERATIONS" class="headerlink" title="DATE/TIME OPERATIONS"></a>DATE/TIME OPERATIONS</h2><p>Operations to manipulate and modify <strong>DATE/TIME attributes</strong>. </p>
+<p>Can be used in either <strong>output and predicates</strong>. </p>
+<p>Support/syntax varies wildly…</p>
+<h2 id="OUTPUT-REDIRECTION"><a href="#OUTPUT-REDIRECTION" class="headerlink" title="OUTPUT REDIRECTION"></a>OUTPUT REDIRECTION</h2><p>Store <strong>query results</strong> in another table: </p>
+<p>→ <strong>Table must not already be defined</strong>. </p>
+<p>→ Table will have the <strong>same # of columns</strong> with <strong>the same types as the input</strong>.</p>
+
+<p>Insert tuples from query into another table: </p>
+<p>→ Inner SELECT must generate the same columns as the target table. </p>
+<p>→ DBMSs have different options/syntax on what to do with integrity violations (e.g., invalid duplicates).</p>
+
+<h2 id="OUTPUT-CONTROL"><a href="#OUTPUT-CONTROL" class="headerlink" title="OUTPUT CONTROL"></a>OUTPUT CONTROL</h2><p><strong>ORDER BY</strong> <column*> [ASC|DESC]</p>
+<p>→ Order the output tuples by the values in one or more of their columns.</p>
+<p><strong>LIMIT</strong>  <strong><count> [offset]</strong> </p>
+<p>→ Limit the # of tuples returned in output. </p>
+<p>→ Can set an offset to return a “range”</p>
+<h2 id="NESTED-QUERIES"><a href="#NESTED-QUERIES" class="headerlink" title="NESTED QUERIES"></a>NESTED QUERIES</h2><p>Queries containing other queries. </p>
+<p>They are often difficult to optimize. </p>
+<p><strong>Inner queries can appear (almost) anywhere in query</strong>.</p>
+<p><strong>ALL</strong>→ Must <strong>satisfy expression for all rows</strong> in the sub-query. </p>
+<p><strong>ANY</strong>→ Must <strong>satisfy expression for at least one row</strong> in the sub-query. </p>
+<p><strong>IN</strong>→ <strong>Equivalent to ‘=ANY()’</strong> . </p>
+<p><strong>EXISTS</strong>→ At <strong>least one row is returned</strong>.</p>
+<h2 id="WINDOW-FUNCTIONS"><a href="#WINDOW-FUNCTIONS" class="headerlink" title="WINDOW FUNCTIONS"></a>WINDOW FUNCTIONS</h2><p>Performs a “sliding” calculation across a set of tuples that are related. </p>
+<p>Like an aggregation but tuples are not grouped into a single output tuples.</p>
+
+
+<p>The <strong>OVER</strong> keyword specifies how to <strong>group together tuples</strong> when computing the window function. </p>
+<p>Use <strong>PARTITION BY to specify group</strong>.</p>
+
+<p>You can also include an <strong>ORDER BY in the window grouping</strong> to sort entries in each group.</p>
+
+<h2 id="COMMON-TABLE-EXPRESSIONS"><a href="#COMMON-TABLE-EXPRESSIONS" class="headerlink" title="COMMON TABLE EXPRESSIONS"></a>COMMON TABLE EXPRESSIONS</h2><p>Provides a way to write <strong>auxiliary statements for use in a larger query</strong>. </p>
+<p>→ Think of it like a <strong>temp table just for one query</strong>. </p>
+<p>Alternative to nested queries and views.</p>
+<img src="/2021/01/21/Database-Sys-Lec2-Intermediate-SQL/CTE_1.png" class="Window">
+<img src="/2021/01/21/Database-Sys-Lec2-Intermediate-SQL/CTE_2.png" class="Window">
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://lavidal.github.io/2021/01/21/Database-Sys-Lec1-Course-Overview-and-Relational-Model/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1187,79 +1342,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lavidal.github.io/2020/07/03/%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2-Foreword/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Enze Long">
-      <meta itemprop="description" content="野蛮生长">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Call Me Sensei">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/03/%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2-Foreword/" class="post-title-link" itemprop="url">写在前面/Foreword</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-07-03 12:40:40 / Modified: 13:46:18" itemprop="dateCreated datePublished" datetime="2020-07-03T12:40:40-04:00">2020-07-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9D%82/" itemprop="url" rel="index"><span itemprop="name">杂</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9D%82/Other/" itemprop="url" rel="index"><span itemprop="name">Other</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>通过Hexo + Github page部署了自己的第一个博客，接下来会在这里记录学习甚至是其他方面的东西。</p>
-<p>无总结则无进步嘛，之前学过的很多东西，经历过的很多的事，没有见诸文字，也就慢慢地忘记了。这也是部署这个博客很重要的一个原因。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1331,7 +1413,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
