@@ -186,7 +186,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-01-21 00:05:04 / Modified: 00:53:24" itemprop="dateCreated datePublished" datetime="2021-01-21T00:05:04-05:00">2021-01-21</time>
+              <time title="Created: 2021-01-21 00:05:04 / Modified: 01:08:58" itemprop="dateCreated datePublished" datetime="2021-01-21T00:05:04-05:00">2021-01-21</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -238,6 +238,7 @@
 <h3 id="RELATIONAL-MODEL"><a href="#RELATIONAL-MODEL" class="headerlink" title="RELATIONAL MODEL"></a>RELATIONAL MODEL</h3><p><strong>Structure</strong>: The definition of the database’s relations and their contents. 数据库关系及其内容的定义。</p>
 <p><strong>Integrity</strong>: Ensure the database’s contents satisfy constraints. </p>
 <p><strong>Manipulation</strong>: Programming interface on how to access and modify a database’s contents.</p>
+<img src="/2021/01/21/Database-Sys-Lec1-Course-Overview-and-Relational-Model/Relational-Model.png" class="">
 <p><img src="E:\lavidal_blog\source\_posts\Database-Sys-Lec1-Course-Overview-and-Relational-Model\Relational-Model.png" alt="Relational-Model"></p>
 <p>A <u><strong>relation</strong></u> is unordered set that contain the relationship of attributes that represent entities.</p>
 <p>A <strong><u>tuple</u></strong> is a set of attribute values (also known as its domain) in the relation. </p>
@@ -249,6 +250,8 @@
 <p>→ SEQUENCE (SQL:2003)</p>
 <p>→ AUTO_INCREMENT (MySQL)</p>
 <h3 id="RELATIONAL-MODEL-FOREIGN-KEYS"><a href="#RELATIONAL-MODEL-FOREIGN-KEYS" class="headerlink" title="RELATIONAL MODEL: FOREIGN KEYS"></a>RELATIONAL MODEL: FOREIGN KEYS</h3><p>A foreign key specifies that <strong>an attribute from one relation has to map to a tuple in another relation</strong>.</p>
+<img src="/2021/01/21/Database-Sys-Lec1-Course-Overview-and-Relational-Model/RELATIONAL-MODEL-FOREIGN-KEYS-1.png" class="">
+<img src="/2021/01/21/Database-Sys-Lec1-Course-Overview-and-Relational-Model/RELATIONAL-MODEL-FOREIGN-KEYS-2.png" class="">
 <p><img src="E:\lavidal_blog\source\_posts\Database-Sys-Lec1-Course-Overview-and-Relational-Model\RELATIONAL-MODEL-FOREIGN-KEYS-1.png" alt="RELATIONAL-MODEL-FOREIGN-KEYS-1"></p>
 <p><img src="E:\lavidal_blog\source\_posts\Database-Sys-Lec1-Course-Overview-and-Relational-Model\RELATIONAL-MODEL-FOREIGN-KEYS-2.png" alt="RELATIONAL-MODEL-FOREIGN-KEYS-2"></p>
 <h2 id="DATA-MANIPULATION-LANGUAGES-DML"><a href="#DATA-MANIPULATION-LANGUAGES-DML" class="headerlink" title="DATA MANIPULATION LANGUAGES (DML)"></a>DATA MANIPULATION LANGUAGES (DML)</h2><p><strong>Methods to store and retrieve information</strong> from a database.</p>
@@ -256,10 +259,12 @@
 <p>→ The query specifies the (high-level) strategy the DBMS should use to find the desired result.</p>
 <p><strong>Non-Procedural:</strong> </p>
 <p>→ The query specifies only what data is wanted and not how to find it.</p>
+
 <p><img src="E:\lavidal_blog\source\_posts\Database-Sys-Lec1-Course-Overview-and-Relational-Model\DATA MANIPULATION LANGUAGES (DML" alt="DATA MANIPULATION LANGUAGES (DML)">.png)</p>
 <h2 id="RELATIONAL-ALGEBRA"><a href="#RELATIONAL-ALGEBRA" class="headerlink" title="RELATIONAL ALGEBRA"></a>RELATIONAL ALGEBRA</h2><p><strong>Fundamental operations to retrieve and manipulate</strong> tuples in a relation. → Based on set algebra. </p>
 <p>Each operator takes <strong>one or more relations as its inputs</strong> and <strong>outputs a new relation</strong>. </p>
 <p>→ We can “chain” operators together to create more complex operations.</p>
+<img src="/2021/01/21/Database-Sys-Lec1-Course-Overview-and-Relational-Model/Relational-Algebra-Operators.png" class="">
 <p><img src="E:\lavidal_blog\source\_posts\Database-Sys-Lec1-Course-Overview-and-Relational-Model\Relational-Algebra-Operators.png" alt="Relational-Algebra-Operators"></p>
 <h3 id="SELECT"><a href="#SELECT" class="headerlink" title="SELECT"></a>SELECT</h3><p>Choose a <strong>subset of the tuples</strong> from a relation that <strong>satisfies a selection predicate</strong>.</p>
 <h3 id="PROJECTION"><a href="#PROJECTION" class="headerlink" title="PROJECTION"></a>PROJECTION</h3><p>Generate a relation with tuples that contains only the <strong>specified attributes</strong>.</p>
@@ -267,7 +272,9 @@
 <h3 id="INTERSECTION"><a href="#INTERSECTION" class="headerlink" title="INTERSECTION"></a>INTERSECTION</h3><p>Generate a relation that <strong>contains only</strong> the tuples that appear <strong>in both of the input relations</strong>.</p>
 <h3 id="DIFFERENCE"><a href="#DIFFERENCE" class="headerlink" title="DIFFERENCE"></a>DIFFERENCE</h3><p>Generate a relation that contains <strong>only the tuples that appear in the first</strong> and <strong>not the second</strong> of the input relations.</p>
 <h3 id="PRODUCT"><a href="#PRODUCT" class="headerlink" title="PRODUCT"></a>PRODUCT</h3><p>Generate a relation that contains <strong>all possible combinations</strong> of tuples from the input relations.</p>
-<h3 id="JOIN"><a href="#JOIN" class="headerlink" title="JOIN"></a>JOIN</h3><p>Generate a relation that contains all tuples that are a combination of two tuples (one from each input relation) with a common value(s) for one or more attributes.<img src="E:\lavidal_blog\source\_posts\Database-Sys-Lec1-Course-Overview-and-Relational-Model\RELATIONAL-ALGEBRA-EXTRA-OPERATORS.png" alt="RELATIONAL-ALGEBRA-EXTRA-OPERATORS"></p>
+<h3 id="JOIN"><a href="#JOIN" class="headerlink" title="JOIN"></a>JOIN</h3><p>Generate a relation that contains all tuples that are a combination of two tuples (one from each input relation) with a common value(s) for one or more </p>
+<img src="/2021/01/21/Database-Sys-Lec1-Course-Overview-and-Relational-Model/RELATIONAL-ALGEBRA-EXTRA-OPERATORS.png" class="">
+<p>attributes.<img src="E:\lavidal_blog\source\_posts\Database-Sys-Lec1-Course-Overview-and-Relational-Model\RELATIONAL-ALGEBRA-EXTRA-OPERATORS.png" alt="RELATIONAL-ALGEBRA-EXTRA-OPERATORS"></p>
 <h3 id="OBSERVATION"><a href="#OBSERVATION" class="headerlink" title="OBSERVATION"></a>OBSERVATION</h3><p>Relational algebra still defines the high-level steps of how to compute a query.</p>
 <p>A better approach is to state <strong>the high-level answer that you want the DBMS to compute</strong>. </p>
 <p>→ Retrieve the joined tuples from R and S where b_id equals 102.</p>
