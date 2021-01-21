@@ -161,6 +161,141 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lavidal.github.io/2021/01/21/Database-Sys-Lec1-Course-Overview-and-Relational-Model/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Enze Long">
+      <meta itemprop="description" content="野蛮生长">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Call Me Sensei">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/21/Database-Sys-Lec1-Course-Overview-and-Relational-Model/" class="post-title-link" itemprop="url">Database Sys Lec1: Course Overview and Relational Model</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-21 00:05:04 / Modified: 00:53:24" itemprop="dateCreated datePublished" datetime="2021-01-21T00:05:04-05:00">2021-01-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/" itemprop="url" rel="index"><span itemprop="name">Computer Science</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Lecture-1-Course-Intro-amp-Relational-Model"><a href="#Lecture-1-Course-Intro-amp-Relational-Model" class="headerlink" title="Lecture #1: Course Intro &amp; Relational Model"></a>Lecture #1: Course Intro &amp; Relational Model</h1><h2 id="Course-Outline"><a href="#Course-Outline" class="headerlink" title="Course Outline"></a>Course Outline</h2><ul>
+<li>Relational Databases </li>
+<li>Storage </li>
+<li>Execution </li>
+<li>Concurrency Control </li>
+<li>Recovery </li>
+<li>Distributed Databases </li>
+<li>Potpourri</li>
+</ul>
+<h2 id="Databases"><a href="#Databases" class="headerlink" title="Databases"></a>Databases</h2><h3 id="DATABASE"><a href="#DATABASE" class="headerlink" title="DATABASE"></a>DATABASE</h3><p><strong>Organized collection of inter-related data</strong> that models some aspect of the real-world. </p>
+<p>Databases are core the component of most computer applications.</p>
+<h3 id="DATABASE-MANAGEMENT-SYSTEM"><a href="#DATABASE-MANAGEMENT-SYSTEM" class="headerlink" title="DATABASE MANAGEMENT SYSTEM"></a>DATABASE MANAGEMENT SYSTEM</h3><p>A DBMS is software that allows applications to <strong>store and analyze information</strong> in a database. </p>
+<p>A general-purpose DBMS is designed to allow the <strong>definition, creation, querying, update, and administration</strong> of databases.</p>
+<h3 id="DATA-MODELS"><a href="#DATA-MODELS" class="headerlink" title="DATA MODELS"></a>DATA MODELS</h3><p>A <u><strong>data model</strong></u> is collection of concepts for describing the data in a database. </p>
+<p>A <u><strong>schema</strong></u> is a description of a particular collection of data, using a given data model.</p>
+<h3 id="DATA-MODEL"><a href="#DATA-MODEL" class="headerlink" title="DATA MODEL"></a>DATA MODEL</h3><ul>
+<li>Relational </li>
+<li>Key/Value </li>
+<li>Graph </li>
+<li>Document </li>
+<li>Column-family </li>
+<li>Array / Matrix </li>
+<li>Hierarchical </li>
+<li>Network </li>
+<li>Multi-Value</li>
+</ul>
+<h3 id="RELATIONAL-MODEL"><a href="#RELATIONAL-MODEL" class="headerlink" title="RELATIONAL MODEL"></a>RELATIONAL MODEL</h3><p><strong>Structure</strong>: The definition of the database’s relations and their contents. 数据库关系及其内容的定义。</p>
+<p><strong>Integrity</strong>: Ensure the database’s contents satisfy constraints. </p>
+<p><strong>Manipulation</strong>: Programming interface on how to access and modify a database’s contents.</p>
+<p><img src="E:\lavidal_blog\source\_posts\Database-Sys-Lec1-Course-Overview-and-Relational-Model\Relational-Model.png" alt="Relational-Model"></p>
+<p>A <u><strong>relation</strong></u> is unordered set that contain the relationship of attributes that represent entities.</p>
+<p>A <strong><u>tuple</u></strong> is a set of attribute values (also known as its domain) in the relation. </p>
+<p>→ Values are (normally) atomic/scalar. </p>
+<p>→ The special value NULL is a member of every domain.</p>
+<h3 id="RELATIONAL-MODEL-PRIMARY-KEYS"><a href="#RELATIONAL-MODEL-PRIMARY-KEYS" class="headerlink" title="RELATIONAL MODEL: PRIMARY KEYS"></a>RELATIONAL MODEL: PRIMARY KEYS</h3><p>A relation’s primary key uniquely identifies a single tuple.</p>
+<p>Some DBMSs <strong>automatically</strong> create an internal primary key if a table does not define one.</p>
+<p>Auto-generation of unique integer primary keys:</p>
+<p>→ SEQUENCE (SQL:2003)</p>
+<p>→ AUTO_INCREMENT (MySQL)</p>
+<h3 id="RELATIONAL-MODEL-FOREIGN-KEYS"><a href="#RELATIONAL-MODEL-FOREIGN-KEYS" class="headerlink" title="RELATIONAL MODEL: FOREIGN KEYS"></a>RELATIONAL MODEL: FOREIGN KEYS</h3><p>A foreign key specifies that <strong>an attribute from one relation has to map to a tuple in another relation</strong>.</p>
+<p><img src="E:\lavidal_blog\source\_posts\Database-Sys-Lec1-Course-Overview-and-Relational-Model\RELATIONAL-MODEL-FOREIGN-KEYS-1.png" alt="RELATIONAL-MODEL-FOREIGN-KEYS-1"></p>
+<p><img src="E:\lavidal_blog\source\_posts\Database-Sys-Lec1-Course-Overview-and-Relational-Model\RELATIONAL-MODEL-FOREIGN-KEYS-2.png" alt="RELATIONAL-MODEL-FOREIGN-KEYS-2"></p>
+<h2 id="DATA-MANIPULATION-LANGUAGES-DML"><a href="#DATA-MANIPULATION-LANGUAGES-DML" class="headerlink" title="DATA MANIPULATION LANGUAGES (DML)"></a>DATA MANIPULATION LANGUAGES (DML)</h2><p><strong>Methods to store and retrieve information</strong> from a database.</p>
+<p><strong>Procedural:</strong> </p>
+<p>→ The query specifies the (high-level) strategy the DBMS should use to find the desired result.</p>
+<p><strong>Non-Procedural:</strong> </p>
+<p>→ The query specifies only what data is wanted and not how to find it.</p>
+<p><img src="E:\lavidal_blog\source\_posts\Database-Sys-Lec1-Course-Overview-and-Relational-Model\DATA MANIPULATION LANGUAGES (DML" alt="DATA MANIPULATION LANGUAGES (DML)">.png)</p>
+<h2 id="RELATIONAL-ALGEBRA"><a href="#RELATIONAL-ALGEBRA" class="headerlink" title="RELATIONAL ALGEBRA"></a>RELATIONAL ALGEBRA</h2><p><strong>Fundamental operations to retrieve and manipulate</strong> tuples in a relation. → Based on set algebra. </p>
+<p>Each operator takes <strong>one or more relations as its inputs</strong> and <strong>outputs a new relation</strong>. </p>
+<p>→ We can “chain” operators together to create more complex operations.</p>
+<p><img src="E:\lavidal_blog\source\_posts\Database-Sys-Lec1-Course-Overview-and-Relational-Model\Relational-Algebra-Operators.png" alt="Relational-Algebra-Operators"></p>
+<h3 id="SELECT"><a href="#SELECT" class="headerlink" title="SELECT"></a>SELECT</h3><p>Choose a <strong>subset of the tuples</strong> from a relation that <strong>satisfies a selection predicate</strong>.</p>
+<h3 id="PROJECTION"><a href="#PROJECTION" class="headerlink" title="PROJECTION"></a>PROJECTION</h3><p>Generate a relation with tuples that contains only the <strong>specified attributes</strong>.</p>
+<h3 id="UNION"><a href="#UNION" class="headerlink" title="UNION"></a>UNION</h3><p>Generate a relation that <strong>contains all tuples that appear in either only one or both input relations</strong>.</p>
+<h3 id="INTERSECTION"><a href="#INTERSECTION" class="headerlink" title="INTERSECTION"></a>INTERSECTION</h3><p>Generate a relation that <strong>contains only</strong> the tuples that appear <strong>in both of the input relations</strong>.</p>
+<h3 id="DIFFERENCE"><a href="#DIFFERENCE" class="headerlink" title="DIFFERENCE"></a>DIFFERENCE</h3><p>Generate a relation that contains <strong>only the tuples that appear in the first</strong> and <strong>not the second</strong> of the input relations.</p>
+<h3 id="PRODUCT"><a href="#PRODUCT" class="headerlink" title="PRODUCT"></a>PRODUCT</h3><p>Generate a relation that contains <strong>all possible combinations</strong> of tuples from the input relations.</p>
+<h3 id="JOIN"><a href="#JOIN" class="headerlink" title="JOIN"></a>JOIN</h3><p>Generate a relation that contains all tuples that are a combination of two tuples (one from each input relation) with a common value(s) for one or more attributes.<img src="E:\lavidal_blog\source\_posts\Database-Sys-Lec1-Course-Overview-and-Relational-Model\RELATIONAL-ALGEBRA-EXTRA-OPERATORS.png" alt="RELATIONAL-ALGEBRA-EXTRA-OPERATORS"></p>
+<h3 id="OBSERVATION"><a href="#OBSERVATION" class="headerlink" title="OBSERVATION"></a>OBSERVATION</h3><p>Relational algebra still defines the high-level steps of how to compute a query.</p>
+<p>A better approach is to state <strong>the high-level answer that you want the DBMS to compute</strong>. </p>
+<p>→ Retrieve the joined tuples from R and S where b_id equals 102.</p>
+<p>因为relational algebra还是对于人类来说太抽象，所以有了query语言</p>
+<h3 id="RELATIONAL-MODEL-QUERIES"><a href="#RELATIONAL-MODEL-QUERIES" class="headerlink" title="RELATIONAL MODEL: QUERIES"></a>RELATIONAL MODEL: QUERIES</h3><p>The <strong>relational model is independent of any query language implementation</strong>. </p>
+<p>SQL is the de facto standard (many dialects).</p>
+<h2 id="CONCLUSION"><a href="#CONCLUSION" class="headerlink" title="CONCLUSION"></a>CONCLUSION</h2><p>Databases are ubiquitous. </p>
+<p><strong>Relational algebra defines the primitives for processing queries</strong> on a relational database. </p>
+<p>We will see <strong>relational algebra</strong> again when we talk about <strong>query optimization + execution</strong>.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://lavidal.github.io/2020/08/30/Leetcode-Weekly-Contest-204/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -186,7 +321,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-08-30 00:49:56 / Modified: 01:06:07" itemprop="dateCreated datePublished" datetime="2020-08-30T00:49:56-04:00">2020-08-30</time>
+              <time title="Created: 2020-08-30 00:49:56 / Modified: 01:07:22" itemprop="dateCreated datePublished" datetime="2020-08-30T00:49:56-04:00">2020-08-30</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -213,9 +348,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><p>Rank: 599/13949</p>
-<p>Score: 13(Q1~3)</p>
-<p>Finish Time: 0:51:39</p>
+          <h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><p><strong>Rank</strong>: 599/13949</p>
+<p><strong>Score</strong>: 13(Q1~3)</p>
+<p><strong>Finish Time</strong>: 0:51:39</p>
 <p>This contest is interesting.  Q3 is tricky and Q4 is worth trying.</p>
 <h3 id="Q2-Maximum-Length-of-Subarray-With-Positive-Product"><a href="#Q2-Maximum-Length-of-Subarray-With-Positive-Product" class="headerlink" title="Q2 Maximum Length of Subarray With Positive Product"></a>Q2 Maximum Length of Subarray With Positive Product</h3><p><a href="https://leetcode.com/problems/maximum-length-of-subarray-with-positive-product/" target="_blank" rel="noopener">https://leetcode.com/problems/maximum-length-of-subarray-with-positive-product/</a></p>
 <p>This is a typical dp problem. When it’s about max/min length of subarray, you can try to use dynamic programming and define dp array like the max/min length ending with index i.</p>
@@ -1118,74 +1253,11 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lavidal.github.io/2020/06/27/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Enze Long">
-      <meta itemprop="description" content="野蛮生长">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Call Me Sensei">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/27/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-27 16:38:27" itemprop="dateCreated datePublished" datetime="2020-06-27T16:38:27-04:00">2020-06-27</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
 
 
 
@@ -1252,20 +1324,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1292,7 +1364,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
