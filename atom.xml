@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lavidal.github.io/"/>
-  <updated>2021-01-21T23:56:44.573Z</updated>
+  <updated>2023-01-08T23:46:15.006Z</updated>
   <id>https://lavidal.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>我对事物的一些理解（持续更新）</title>
+    <link href="https://lavidal.github.io/2023/01/08/%E6%88%91%E5%AF%B9%E4%BA%8B%E7%89%A9%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/"/>
+    <id>https://lavidal.github.io/2023/01/08/%E6%88%91%E5%AF%B9%E4%BA%8B%E7%89%A9%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/</id>
+    <published>2023-01-08T21:59:59.000Z</published>
+    <updated>2023-01-08T23:46:15.006Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="观世界"><a href="#观世界" class="headerlink" title="观世界"></a>观世界</h1><p>世界是以一种严格的理性运行的，其中掺杂许多不同元素：善恶，是非，情绪，感性等等等等，但本质，是一种严格的理性。</p><p>世界的底色是理性，但不代表无趣，其理性含有对真善美的支持，对智慧的推崇，对灵魂的关怀，对恶的存在的必要，善恶是非的无限变化。</p><h2 id="我对于世界观的思维模式"><a href="#我对于世界观的思维模式" class="headerlink" title="我对于世界观的思维模式"></a>我对于世界观的思维模式</h2><p>是一种自适应模式，adaptive。基于过去经历，此时境遇来得出客观结论，达到与现实和自我的平衡。</p><h1 id="主义"><a href="#主义" class="headerlink" title="主义"></a>主义</h1><p>基于唯物主义的唯心主义。但两种融合的话怎么叫“唯”呢，一半一半，半殖民地半封建（不是。</p><h1 id="我是个怎样的人"><a href="#我是个怎样的人" class="headerlink" title="我是个怎样的人"></a>我是个怎样的人</h1><p>我是个认准一件事情后，会反复去努力的人，一直重复。喜欢的菜，餐馆，音乐，都会在一段时间反复的光顾。不过最近也在领悟给自己生活加入新元素新想法的道理。</p><p>情感比较充沛。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;观世界&quot;&gt;&lt;a href=&quot;#观世界&quot; class=&quot;headerlink&quot; title=&quot;观世界&quot;&gt;&lt;/a&gt;观世界&lt;/h1&gt;&lt;p&gt;世界是以一种严格的理性运行的，其中掺杂许多不同元素：善恶，是非，情绪，感性等等等等，但本质，是一种严格的理性。&lt;/p&gt;
+&lt;p&gt;世界的
+      
+    
+    </summary>
+    
+    
+      <category term="Philosophy" scheme="https://lavidal.github.io/categories/Philosophy/"/>
+    
+    
+      <category term="Philosophy" scheme="https://lavidal.github.io/tags/Philosophy/"/>
+    
+  </entry>
   
   <entry>
     <title>Database Sys Lec2 Intermediate SQL</title>
@@ -44,8 +71,8 @@
   
   <entry>
     <title>Database Sys Lec1: Course Overview and Relational Model</title>
-    <link href="https://lavidal.github.io/2021/01/21/Database-Sys-Lec1-Course-Overview-and-Relational-Model/"/>
-    <id>https://lavidal.github.io/2021/01/21/Database-Sys-Lec1-Course-Overview-and-Relational-Model/</id>
+    <link href="https://lavidal.github.io/2021/01/20/Database-Sys-Lec1-Course-Overview-and-Relational-Model/"/>
+    <id>https://lavidal.github.io/2021/01/20/Database-Sys-Lec1-Course-Overview-and-Relational-Model/</id>
     <published>2021-01-21T05:05:04.000Z</published>
     <updated>2021-01-21T06:08:58.469Z</updated>
     
@@ -70,8 +97,8 @@
   
   <entry>
     <title>Leetcode Weekly Contest 204</title>
-    <link href="https://lavidal.github.io/2020/08/30/Leetcode-Weekly-Contest-204/"/>
-    <id>https://lavidal.github.io/2020/08/30/Leetcode-Weekly-Contest-204/</id>
+    <link href="https://lavidal.github.io/2020/08/29/Leetcode-Weekly-Contest-204/"/>
+    <id>https://lavidal.github.io/2020/08/29/Leetcode-Weekly-Contest-204/</id>
     <published>2020-08-30T04:49:56.000Z</published>
     <updated>2020-08-30T05:07:22.512Z</updated>
     
